@@ -1,0 +1,359 @@
+/* The opening scene */
+
+.env-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  isolation: isolate;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(20px, 4.2svh, 44px);
+  padding: 16px;
+  text-align: center;
+}
+
+.env-screen__intro {
+  position: relative;
+  z-index: 2;
+}
+
+.env-screen__invited {
+  font-family: var(--font-caps);
+  font-size: clamp(0.78rem, 0.68rem + 0.55vw, 1.08rem);
+  letter-spacing: 0.24em;
+  margin-right: -0.24em;
+  color: var(--gold-champagne);
+}
+
+.env-screen__names {
+  margin-top: 2px;
+  padding: 0.12em 0.25em 0.08em;
+  font-family: var(--font-script);
+  font-size: clamp(2.4rem, 12.6vw, 5.2rem);
+  line-height: 1.15;
+  white-space: nowrap;
+}
+
+.env-screen__action {
+  position: relative;
+  z-index: 2;
+}
+
+.env-float {
+  animation: env-bob 6s ease-in-out infinite;
+  will-change: transform;
+}
+
+.is-opening .env-float {
+  animation-play-state: paused;
+}
+
+.is-opening .env {
+  cursor: default;
+}
+
+@keyframes env-bob {
+  50% {
+    translate: 0 -7px;
+  }
+}
+
+/* The envelope. Everything inside is sized in container units, so its proportions
+   and lettering hold at any width. */
+.env {
+  --env-w: min(90vw, 600px, calc((100svh - 292px) * 1.46));
+  position: relative;
+  width: var(--env-w);
+  aspect-ratio: 146 / 100;
+  container-type: inline-size;
+  perspective: 1200px;
+  perspective-origin: 50% 0;
+  cursor: pointer;
+  user-select: none;
+}
+
+.env__back {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: 1.2cqw;
+  background: #efe0bb url('../assets/textures/silk.webp') center / 300px;
+  box-shadow:
+    0 3cqw 7cqw rgba(12, 1, 3, 0.62),
+    0 0.6cqw 1.4cqw rgba(12, 1, 3, 0.5);
+}
+
+/* The card */
+.env__card {
+  position: absolute;
+  z-index: 3;
+  left: 4%;
+  right: 4%;
+  top: 5%;
+  bottom: 3%;
+  border-radius: 0.6cqw;
+  background: var(--ivory) url('../assets/textures/paper.webp') center / 400px;
+  box-shadow: 0 1cqw 3cqw rgba(30, 3, 8, 0.42);
+  color: var(--ink);
+  will-change: transform;
+}
+
+.env__card-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3cqw;
+  text-align: center;
+}
+
+.env__card-frame {
+  position: absolute;
+  inset: 1.7cqw;
+  border: 0.2cqw solid var(--gold-antique);
+  outline: 0.08cqw solid var(--gold-antique);
+  outline-offset: -0.8cqw;
+}
+
+.env__card-eyebrow {
+  font-family: var(--font-caps);
+  font-size: 2.1cqw;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  margin-bottom: 2.4cqw;
+}
+
+.env__card-name {
+  font-family: var(--font-caps);
+  font-weight: 600;
+  font-size: 5.5cqw;
+  line-height: 1.2;
+  letter-spacing: 0.05em;
+  color: var(--burgundy);
+}
+
+.env__card-with {
+  font-family: var(--font-script);
+  font-size: 4.4cqw;
+  line-height: 1.2;
+  color: var(--gold-deep);
+}
+
+.env__card .divider {
+  width: 44cqw;
+  margin-top: 1.6cqw;
+  gap: 1cqw;
+}
+
+.env__card .divider svg {
+  width: 8cqw;
+  height: 3.2cqw;
+}
+
+.env__card-date {
+  margin-top: 0.8cqw;
+  font-size: 2.9cqw;
+  color: var(--ink-soft);
+}
+
+/* The pocket, built from three folded paper panels */
+.env__pocket {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  border-radius: 1.2cqw;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.env__pocket svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.env__panel {
+  position: absolute;
+  inset: 0;
+  background-image:
+    var(--panel-tone),
+    url('../assets/textures/velvet.webp');
+  background-size: auto, 420px;
+}
+
+.env__panel--left {
+  --panel-tone: linear-gradient(95deg, rgba(122, 21, 41, 0.92), rgba(84, 13, 28, 0.9));
+  clip-path: polygon(0 0, 53% 54%, 0 100%);
+}
+
+.env__panel--right {
+  --panel-tone: linear-gradient(265deg, rgba(122, 21, 41, 0.92), rgba(84, 13, 28, 0.9));
+  clip-path: polygon(100% 0, 47% 54%, 100% 100%);
+}
+
+.env__panel--bottom {
+  --panel-tone: linear-gradient(0deg, rgba(142, 27, 50, 0.92), rgba(102, 17, 34, 0.9));
+  clip-path: polygon(0 100%, 46% 49%, 50% 46%, 54% 49%, 100% 100%);
+  filter: drop-shadow(0 -0.3cqw 0.8cqw rgba(20, 2, 6, 0.4));
+}
+
+/* The flap: a two-sided leaf hinged along the envelope's top edge */
+.env__flap {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 6;
+  height: 60%;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.env__flap-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  clip-path: polygon(0 0, 100% 0, 52.4% 95%, 51.2% 98.6%, 50% 100%, 48.8% 98.6%, 47.6% 95%);
+}
+
+.env__flap-face--front {
+  background-image:
+    linear-gradient(180deg, rgba(150, 30, 54, 0.92), rgba(112, 19, 38, 0.92) 60%, rgba(94, 15, 31, 0.94)),
+    url('../assets/textures/velvet.webp');
+  background-size: auto, 420px;
+}
+
+.env__flap-face--front svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.env__flap-face--back {
+  transform: rotateX(180deg);
+  background:
+    linear-gradient(0deg, rgba(120, 88, 34, 0.24), transparent 55%),
+    #eddcb4 url('../assets/textures/silk.webp') center / 300px;
+}
+
+.env__flap-shadow {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 5;
+  height: 62%;
+  background: rgba(16, 1, 4, 0.6);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  filter: blur(1cqw);
+  pointer-events: none;
+}
+
+/* The gold seal, resting on the flap's tip */
+.seal {
+  position: absolute;
+  z-index: 8;
+  left: 50%;
+  top: 57%;
+  width: 21cqw;
+  aspect-ratio: 1;
+  margin: -10.5cqw 0 0 -10.5cqw;
+}
+
+.seal__whole,
+.seal__half {
+  position: absolute;
+  inset: 0;
+  filter: drop-shadow(0 0.7cqw 1cqw rgba(16, 1, 4, 0.6));
+}
+
+.seal__half--l {
+  clip-path: polygon(0 0, 54% 0, 47% 17%, 56% 33%, 46% 50%, 57% 67%, 47% 84%, 52% 100%, 0 100%);
+}
+
+.seal__half--r {
+  clip-path: polygon(54% 0, 100% 0, 100% 100%, 52% 100%, 47% 84%, 57% 67%, 46% 50%, 56% 33%, 47% 17%);
+}
+
+.seal__glow {
+  position: absolute;
+  inset: -16%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(246, 232, 191, 0.5), transparent 68%);
+  animation: seal-glow 3.4s ease-in-out infinite;
+}
+
+/* The CSS pulse would otherwise override the fade, leaving a glow behind */
+.is-opening .seal__glow {
+  display: none;
+}
+
+@keyframes seal-glow {
+  0%,
+  100% {
+    transform: scale(0.92);
+    opacity: 0.25;
+  }
+  50% {
+    transform: scale(1.06);
+    opacity: 0.9;
+  }
+}
+
+.seal__bit {
+  position: absolute;
+  left: 48%;
+  top: 48%;
+  width: 1.5cqw;
+  height: 1.1cqw;
+  border-radius: 35% 60% 40% 55%;
+  background: linear-gradient(135deg, #f1dd9f, #a67c2e);
+}
+
+/* Short landscape phones: text sits beside the envelope, not above it */
+@media (max-height: 520px) and (orientation: landscape) {
+  .env-screen {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-rows: 1fr 1fr;
+    gap: 6px 28px;
+    padding: 12px 28px;
+  }
+  .env-screen__intro {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: end;
+  }
+  .env-screen__action {
+    grid-column: 1;
+    grid-row: 2;
+    align-self: start;
+  }
+  .env-float {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    align-self: center;
+  }
+  .env {
+    --env-w: min(48vw, calc((100svh - 56px) * 1.46));
+  }
+  .env-screen__invited {
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    margin-right: -0.14em;
+  }
+  .env-screen__names {
+    font-size: clamp(2.2rem, 6vw, 3.2rem);
+  }
+  .env-screen__action .gold-button {
+    padding-inline: 18px;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+  }
+}

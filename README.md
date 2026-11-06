@@ -1,16 +1,36 @@
-# React + Vite
+# Meeran & Amra: Wedding Invitation
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+An animated wedding invitation website built with React, Vite and Framer Motion.
 
-Currently, two official plugins are available:
+## Run it
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+You need [Node.js](https://nodejs.org) (the LTS version) installed.
 
-## React Compiler
+```
+npm install
+npm run dev       # opens at http://localhost:5173
+```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Publish it
 
-## Expanding the Oxlint configuration
+1. Choose where it will live (Netlify, Vercel, Cloudflare Pages and GitHub Pages all work).
+2. Put the final address in `.env`, for example `VITE_SITE_URL=https://meeran-amra.netlify.app`.
+   WhatsApp only shows the preview image when this is set.
+3. Run `npm run build` and upload the `dist` folder.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+## Change things
+
+| What | Where |
+| --- | --- |
+| Names, date, time, venue, map links, WhatsApp message | `src/data/wedding.js` |
+| Colours and fonts | `src/index.css` |
+| Background music | Replace `public/music/royal-procession.mp3` (keep the file name) |
+| Venue picture | `src/components/VenueIllustration.jsx`, or use an `<img>` in `Venue.jsx` |
+| Link preview image | `public/og-image.jpg` (1200 × 630) |
+
+## Assets and licensing
+
+The artwork, textures and music were all generated for this project, so there are no
+third-party rights to clear. The fonts (Cinzel, Cormorant Garamond, Pinyon Script) use the
+SIL Open Font License and are served from the site itself. The venue picture is a decorative
+illustration, not a photograph of the real hall.

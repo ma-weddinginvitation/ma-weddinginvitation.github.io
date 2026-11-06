@@ -1,0 +1,69 @@
+.venue__layout {
+  display: grid;
+  gap: clamp(30px, 6vh, 56px);
+  align-items: center;
+  justify-items: center;
+  width: min(100%, 1120px);
+}
+
+/* A gold-framed arched window onto the illustration */
+.venue__frame {
+  position: relative;
+  width: min(100%, 480px);
+  aspect-ratio: 5 / 5.6;
+  padding: 7px;
+  border-radius: 50% 50% 4px 4px / 34% 34% 4px 4px;
+  background: linear-gradient(140deg, #9a7229, #e0c172 34%, #f8eab8 50%, #c99f49 72%, #8d6722);
+  box-shadow: 0 24px 54px rgba(74, 11, 24, 0.3);
+}
+
+.venue-art {
+  width: 100%;
+  height: 100%;
+  border: 3px solid var(--ivory);
+  border-radius: inherit;
+}
+
+.venue__details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+  width: 100%;
+}
+
+.venue__pin {
+  color: var(--gold-deep);
+  margin-bottom: 10px;
+}
+
+.venue__name {
+  padding-block: 0.05em;
+  font-family: var(--font-caps);
+  font-weight: 600;
+  font-size: clamp(1.9rem, 1.2rem + 3.3vw, 3.5rem);
+  line-height: 1.22;
+  letter-spacing: 0.03em;
+  margin-bottom: 14px;
+}
+
+.venue__address {
+  margin-top: 14px;
+  font-size: clamp(1.3rem, 1.15rem + 0.6vw, 1.6rem);
+  color: var(--ink-soft);
+}
+
+.venue__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: min(100%, 470px);
+  margin-top: clamp(24px, 4vh, 36px);
+}
+
+@media (min-width: 900px) {
+  .venue__layout {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: 64px;
+  }
+}

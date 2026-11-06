@@ -1,184 +1,224 @@
-.counter {
-  font-size: 16px;
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: var(--accent);
-  background: var(--accent-bg);
-  border: 2px solid transparent;
-  transition: border-color 0.3s;
-  margin-bottom: 24px;
+/* Section surfaces and treatments shared by the whole invitation */
 
-  &:hover {
-    border-color: var(--accent-border);
-  }
-  &:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-  }
-}
-
-.hero {
+.section {
   position: relative;
-
-  .base,
-  .framework,
-  .vite {
-    inset-inline: 0;
-    margin: 0 auto;
-  }
-
-  .base {
-    width: 170px;
-    position: relative;
-    z-index: 0;
-  }
-
-  .framework,
-  .vite {
-    position: absolute;
-  }
-
-  .framework {
-    z-index: 1;
-    top: 34px;
-    height: 28px;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(44deg) rotateY(39deg)
-      scale(1.4);
-  }
-
-  .vite {
-    z-index: 0;
-    top: 107px;
-    height: 26px;
-    width: auto;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(40deg) rotateY(39deg)
-      scale(0.8);
-  }
-}
-
-#center {
+  isolation: isolate;
+  overflow: hidden;
+  min-height: 100svh;
   display: flex;
   flex-direction: column;
-  gap: 25px;
-  place-content: center;
-  place-items: center;
-  flex-grow: 1;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(72px, 12vh, 128px) var(--gutter);
+  text-align: center;
+}
 
-  @media (max-width: 1024px) {
-    padding: 32px 20px 24px;
-    gap: 18px;
+.surface-ivory {
+  background: var(--ivory) url('./assets/textures/paper.webp') center / 640px;
+  color: var(--ink);
+}
+
+.surface-velvet {
+  background: var(--maroon) url('./assets/textures/velvet.webp') center / 1024px;
+  color: var(--gold-pale);
+}
+
+/* Soft vignette keeps velvet sections deep at the edges and lit at the centre */
+.surface-velvet::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(ellipse at 50% 42%, rgba(134, 26, 48, 0.28), rgba(32, 3, 8, 0.72) 92%);
+  pointer-events: none;
+}
+
+.surface-silk {
+  background: var(--cream) url('./assets/textures/silk.webp') center / 1024px;
+  color: var(--ink);
+}
+
+/* Foil lettering */
+.foil {
+  background: var(--foil) 0 50% / 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.foil--shimmer {
+  animation: foil-sweep 9s ease-in-out infinite alternate;
+}
+
+.foil-dark {
+  background: var(--foil-dark) 0 50% / 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@keyframes foil-sweep {
+  to {
+    background-position: 100% 50%;
   }
 }
 
-#next-steps {
-  display: flex;
-  border-top: 1px solid var(--border);
-  text-align: left;
-
-  & > div {
-    flex: 1 1 0;
-    padding: 32px;
-    @media (max-width: 1024px) {
-      padding: 24px 20px;
-    }
-  }
-
-  .icon {
-    margin-bottom: 16px;
-    width: 22px;
-    height: 22px;
-  }
-
-  @media (max-width: 1024px) {
-    flex-direction: column;
-    text-align: center;
-  }
+/* The small tracked capitals used as eyebrow labels */
+.eyebrow {
+  font-family: var(--font-caps);
+  font-weight: 400;
+  font-size: clamp(0.82rem, 0.72rem + 0.45vw, 1.05rem);
+  letter-spacing: 0.3em;
+  margin-right: -0.3em;
+  line-height: 1.7;
 }
 
-#docs {
-  border-right: 1px solid var(--border);
-
-  @media (max-width: 1024px) {
-    border-right: none;
-    border-bottom: 1px solid var(--border);
-  }
-}
-
-#next-steps ul {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  gap: 8px;
-  margin: 32px 0 0;
-
-  .logo {
-    height: 18px;
-  }
-
-  a {
-    color: var(--text-h);
-    font-size: 16px;
-    border-radius: 6px;
-    background: var(--social-bg);
-    display: flex;
-    padding: 6px 12px;
-    align-items: center;
-    gap: 8px;
-    text-decoration: none;
-    transition: box-shadow 0.3s;
-
-    &:hover {
-      box-shadow: var(--shadow);
-    }
-    .button-icon {
-      height: 18px;
-      width: 18px;
-    }
-  }
-
-  @media (max-width: 1024px) {
-    margin-top: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
-
-    li {
-      flex: 1 1 calc(50% - 8px);
-    }
-
-    a {
-      width: 100%;
-      justify-content: center;
-      box-sizing: border-box;
-    }
-  }
-}
-
-#spacer {
-  height: 88px;
-  border-top: 1px solid var(--border);
-  @media (max-width: 1024px) {
-    height: 48px;
-  }
-}
-
-.ticks {
+/* Gold action buttons */
+.gold-button {
   position: relative;
-  width: 100%;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75em;
+  min-height: 54px;
+  padding: 14px 28px;
+  border: 1px solid #f3e0a6;
+  border-radius: 2px;
+  background: linear-gradient(135deg, #a67c2e, #dcbc6c 45%, #c49a45 70%, #9b7329);
+  box-shadow:
+    0 10px 26px rgba(20, 2, 5, 0.34),
+    inset 0 0 0 3px rgba(74, 11, 24, 0.14),
+    inset 0 1px 0 rgba(255, 246, 214, 0.6);
+  color: #2c060c;
+  font-family: var(--font-caps);
+  font-weight: 600;
+  font-size: clamp(0.76rem, 0.7rem + 0.25vw, 0.92rem);
+  letter-spacing: 0.16em;
+  line-height: 1.35;
+  text-decoration: none;
+  text-align: center;
+  text-wrap: balance;
+  cursor: pointer;
+  transition:
+    transform 0.3s var(--ease-silk),
+    box-shadow 0.3s var(--ease-silk);
+}
 
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    top: -4.5px;
-    border: 5px solid transparent;
-  }
+.gold-button svg {
+  flex: none;
+}
 
-  &::before {
-    left: 0;
-    border-left-color: var(--border);
+/* A slow band of light crossing the button */
+.gold-button::after {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 -60%;
+  width: 45%;
+  background: linear-gradient(100deg, transparent, rgba(255, 250, 228, 0.34), transparent);
+  transform: skewX(-18deg);
+  animation: button-glint 6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes button-glint {
+  0%,
+  70% {
+    left: -60%;
   }
-  &::after {
-    right: 0;
-    border-right-color: var(--border);
+  100% {
+    left: 130%;
   }
+}
+
+@media (hover: hover) {
+  .gold-button:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 16px 34px rgba(20, 2, 5, 0.42),
+      inset 0 0 0 3px rgba(74, 11, 24, 0.14),
+      inset 0 1px 0 rgba(255, 246, 214, 0.6);
+  }
+}
+
+.gold-button:active {
+  transform: translateY(1px);
+}
+
+/* The maroon variant, for use on light surfaces */
+.gold-button--maroon {
+  border-color: var(--gold-antique);
+  background: linear-gradient(135deg, #4a0b18, #7a1529 55%, #4a0b18);
+  color: var(--gold-pale);
+  box-shadow:
+    0 10px 24px rgba(74, 11, 24, 0.26),
+    inset 0 0 0 3px rgba(208, 169, 79, 0.26);
+}
+
+.gold-button--maroon::after {
+  background: linear-gradient(100deg, transparent, rgba(246, 232, 191, 0.24), transparent);
+}
+
+/* Ornamental separator */
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: min(100%, 340px);
+  margin-inline: auto;
+  color: var(--gold-antique);
+}
+
+.divider__line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, currentColor);
+}
+
+.divider__line:last-child {
+  transform: scaleX(-1);
+}
+
+.divider svg {
+  flex: none;
+  width: 64px;
+  height: 26px;
+}
+
+/* Filigree card corners */
+.corner {
+  position: absolute;
+  width: clamp(58px, 14vw, 104px);
+  height: clamp(58px, 14vw, 104px);
+  color: var(--gold-antique);
+  pointer-events: none;
+}
+
+.corner--tl { top: 0; left: 0; }
+.corner--tr { top: 0; right: 0; transform: scaleX(-1); }
+.corner--bl { bottom: 0; left: 0; transform: scaleY(-1); }
+.corner--br { bottom: 0; right: 0; transform: scale(-1); }
+
+/* Background mandala that sits behind section content */
+.backdrop-mandala {
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Fallen petals */
+.petals {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.petal {
+  position: absolute;
+  top: -5%;
+  left: 0;
+  will-change: transform;
 }

@@ -1,0 +1,74 @@
+.closing__mandala {
+  top: 50%;
+  left: 50%;
+  width: min(136vw, 128svh);
+  aspect-ratio: 1;
+  margin: calc(min(136vw, 128svh) / -2) 0 0 calc(min(136vw, 128svh) / -2);
+  color: var(--gold);
+  opacity: 0.13;
+}
+
+.closing__blossom {
+  position: relative;
+  z-index: 1;
+  width: clamp(76px, 12vh, 112px);
+  height: clamp(76px, 12vh, 112px);
+  margin-bottom: clamp(20px, 4vh, 36px);
+  filter: drop-shadow(0 6px 16px rgba(16, 1, 4, 0.55));
+}
+
+.closing__content {
+  position: relative;
+  z-index: 1;
+  max-width: 860px;
+}
+
+.closing__blessing {
+  padding-block: 0.08em;
+  font-weight: 500;
+  font-style: italic;
+  font-size: clamp(1.95rem, 1.3rem + 3vw, 3.6rem);
+  line-height: 1.26;
+}
+
+.closing__regards {
+  margin-top: clamp(24px, 5vh, 44px);
+  font-family: var(--font-script);
+  font-size: clamp(2.1rem, 1.8rem + 1.3vw, 3rem);
+  line-height: 1.25;
+  color: var(--gold-champagne);
+}
+
+.closing__hosts {
+  margin-top: 6px;
+  font-family: var(--font-caps);
+  font-size: clamp(1.02rem, 0.88rem + 0.8vw, 1.5rem);
+  line-height: 1.45;
+  letter-spacing: 0.04em;
+  color: var(--gold-pale);
+}
+
+.closing__share {
+  position: relative;
+  z-index: 1;
+  margin-top: clamp(28px, 5vh, 44px);
+}
+
+.closing__rule {
+  position: relative;
+  z-index: 1;
+  width: min(70%, 380px);
+  height: 1px;
+  margin-top: clamp(34px, 6vh, 56px);
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.closing__names {
+  position: relative;
+  z-index: 1;
+  margin-top: 12px;
+  padding: 0.1em 0.3em;
+  font-family: var(--font-script);
+  font-size: clamp(2.3rem, 2rem + 1.5vw, 3.2rem);
+  line-height: 1.2;
+}

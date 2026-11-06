@@ -1,0 +1,65 @@
+.section-nav {
+  position: fixed;
+  top: 50%;
+  right: 14px;
+  z-index: 40;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.section-nav a {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  min-height: 30px;
+  padding-inline: 8px;
+  text-decoration: none;
+}
+
+.section-nav__dot {
+  width: 9px;
+  height: 9px;
+  transform: rotate(45deg);
+  border: 1px solid var(--gold-antique);
+  background: rgba(44, 6, 12, 0.3);
+  transition:
+    background 0.4s ease,
+    transform 0.4s ease;
+}
+
+.section-nav a.is-active .section-nav__dot {
+  background: var(--gold);
+  transform: rotate(45deg) scale(1.3);
+}
+
+.section-nav__label {
+  padding: 3px 10px;
+  border-radius: 2px;
+  background: rgba(44, 6, 12, 0.88);
+  color: var(--gold-champagne);
+  font-family: var(--font-caps);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(6px);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+  pointer-events: none;
+}
+
+.section-nav a:hover .section-nav__label,
+.section-nav a:focus-visible .section-nav__label {
+  opacity: 1;
+  transform: none;
+}
+
+@media (max-width: 860px) {
+  .section-nav {
+    display: none;
+  }
+}

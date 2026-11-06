@@ -1,122 +1,84 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import { useEffect, useState } from 'react'
+import './App.css' // first, so that each component's own stylesheet can override it
+import { GoldDefs } from './components/Ornaments'
+import Envelope from './components/Envelope'
+import Welcome from './components/Welcome'
+import Couple from './components/Couple'
+import Invitation from './components/Invitation'
+import Countdown from './components/Countdown'
+import Venue from './components/Venue'
+import Closing from './components/Closing'
+import MusicToggle from './components/MusicToggle'
+import SectionNav from './components/SectionNav'
+import { useMusic } from './hooks/useMusic'
+import velvet from './assets/textures/velvet.webp'
 
-function App() {
-  const [count, setCount] = useState(0)
+// Hold the small M & A loader until fonts and the velvet are ready, but never for long.
+function loadEssentials() {
+  const assets = [
+    document.fonts.load('600 40px Cinzel'),
+    document.fonts.load('400 60px "Pinyon Script"'),
+    document.fonts.load('500 20px "Cormorant Garamond"'),
+    new Promise((resolve) => {
+      const image = new Image()
+      image.onload = image.onerror = resolve
+      image.src = velvet
+    }),
+  ]
+  const timeout = new Promise((resolve) => setTimeout(resolve, 1800))
+  return Promise.race([Promise.all(assets), timeout])
+}
+
+export default function App() {
+  const [ready, setReady] = useState(false)
+  const [revealed, setRevealed] = useState(false) // the site has mounted beneath the envelope
+  const [opened, setOpened] = useState(false) // the envelope scene has gone
+  const music = useMusic()
+
+  useEffect(() => {
+    let active = true
+    // The guest always starts from the envelope, so never restore an old scroll position.
+    history.scrollRestoration = 'manual'
+    window.scrollTo(0, 0)
+    loadEssentials().finally(() => active && setReady(true))
+    return () => {
+      active = false
+    }
+  }, [])
+
+  useEffect(() => {
+    document.body.classList.toggle('is-locked', !opened)
+  }, [opened])
+
+  if (!ready) {
+    return (
+      <div className="boot" role="status" aria-label="Loading your invitation">
+        <span>M &amp; A</span>
+      </div>
+    )
+  }
 
   return (
     <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+      <GoldDefs />
 
-      <div className="ticks"></div>
+      {!opened && (
+        <Envelope onOpenStart={music.start} onReveal={() => setRevealed(true)} onDone={() => setOpened(true)} />
+      )}
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+      {revealed && (
+        <main>
+          <Welcome />
+          <Couple />
+          <Invitation />
+          <Countdown />
+          <Venue />
+          <Closing />
+        </main>
+      )}
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
+      {revealed && <SectionNav />}
+      {revealed && <MusicToggle playing={music.playing} onToggle={music.toggle} />}
     </>
   )
 }
-
-export default App
