@@ -39,7 +39,6 @@ export function whatsappShareUrl(siteUrl) {
 
 export const SECTIONS = [
   { id: 'welcome', label: 'Welcome' },
-  { id: 'couple', label: 'The Couple' },
   { id: 'invitation', label: 'Invitation' },
   { id: 'date', label: 'Date & Time' },
   { id: 'venue', label: 'Venue' },

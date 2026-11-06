@@ -3,7 +3,6 @@ import './App.css' // first, so that each component's own stylesheet can overrid
 import { GoldDefs } from './components/Ornaments'
 import Envelope from './components/Envelope'
 import Welcome from './components/Welcome'
-import Couple from './components/Couple'
 import Invitation from './components/Invitation'
 import Countdown from './components/Countdown'
 import Venue from './components/Venue'
@@ -69,7 +68,6 @@ export default function App() {
       {revealed && (
         <main>
           <Welcome />
-          <Couple />
           <Invitation />
           <Countdown />
           <Venue />

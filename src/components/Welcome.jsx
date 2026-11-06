@@ -28,9 +28,8 @@ export default function Welcome() {
       </div>
 
       <motion.a
-        href="#couple"
+        href="#invitation"
         className="welcome__next"
-        aria-label="Continue to the couple"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1, y: [0, 7, 0] }}
         transition={{
@@ -38,6 +37,7 @@ export default function Welcome() {
           y: { duration: 2.4, repeat: Infinity, ease: 'easeInOut', delay: 1.6 },
         }}
       >
+        Scroll Down
         <ChevronDown size={26} strokeWidth={1.3} aria-hidden="true" />
       </motion.a>
     </section>

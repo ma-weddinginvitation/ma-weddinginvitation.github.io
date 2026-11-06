@@ -33,6 +33,13 @@
   scale: -1 1;
 }
 
+/* On phones the lower spray stops short of the centred scroll prompt */
+@media (max-width: 600px) {
+  .welcome__spray--br {
+    width: calc(50vw - 66px);
+  }
+}
+
 .welcome__eyebrow {
   margin-bottom: clamp(14px, 3vh, 26px);
   color: var(--gold-deep);
@@ -59,12 +66,22 @@
 
 .welcome__next {
   position: absolute;
-  bottom: clamp(18px, 4vh, 40px);
-  left: 50%;
-  margin-left: -24px;
-  width: 48px;
-  height: 48px;
+  bottom: clamp(10px, 3vh, 34px);
+  left: 0;
+  right: 0;
+  width: fit-content;
+  min-height: 48px;
+  margin-inline: auto;
+  padding: 4px 12px;
   display: grid;
-  place-items: center;
+  justify-items: center;
+  font-family: var(--font-caps);
+  font-weight: 600;
+  font-size: 0.74rem;
+  letter-spacing: 0.2em;
+  line-height: 1.5;
+  text-decoration: none;
+  text-transform: uppercase;
   color: var(--gold-deep);
+  touch-action: manipulation;
 }
