@@ -73,6 +73,7 @@
   perspective-origin: 50% 0;
   cursor: pointer;
   user-select: none;
+  touch-action: manipulation;
 }
 
 .env__back {

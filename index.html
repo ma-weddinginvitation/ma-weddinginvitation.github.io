@@ -45,6 +45,19 @@
       @keyframes boot-pulse { 50% { opacity: 0.35; } }
       @media (prefers-reduced-motion: reduce) { .boot span { animation: none; } }
     </style>
+    <!-- If the app cannot start, guests still get the wedding details instead of an endless loader. -->
+    <script>
+      window.showInvitationFallback = function () {
+        document.getElementById('root').innerHTML = document.getElementById('invitation-fallback').innerHTML
+      }
+      window.addEventListener('error', function (event) {
+        if (event.target && event.target.tagName === 'SCRIPT') window.showInvitationFallback()
+      }, true)
+      // On a very slow connection the app replaces these details as soon as it arrives.
+      setTimeout(function () {
+        if (document.querySelector('.boot')) window.showInvitationFallback()
+      }, 15000)
+    </script>
   </head>
   <body>
     <div id="root">
@@ -61,6 +74,18 @@
         <p>Drizzle Elite Mahal<br />Courtallam, Tamil Nadu 627805</p>
       </div>
     </noscript>
+    <template id="invitation-fallback">
+      <div style="padding: 32px; color: #f7efdc; font-family: Georgia, serif; text-align: center; line-height: 1.7">
+        <h1>Meeran Mydeen with Amra Banu</h1>
+        <p>
+          Mr. Syed Ibrahim &amp; Mrs. Najiba Begam cordially invite you and your family to grace the wedding
+          celebration of their beloved son.
+        </p>
+        <p>Sunday, 10 January 2027<br />11:00 AM – 12:00 PM</p>
+        <p>Drizzle Elite Mahal<br />Courtallam, Tamil Nadu 627805</p>
+        <p><a href="" style="color: #d9b866">Tap here to reload the full invitation</a></p>
+      </div>
+    </template>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

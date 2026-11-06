@@ -7,6 +7,7 @@ import './Envelope.css'
 
 const SILK = [0.22, 0.8, 0.24, 1]
 const BIT_COUNT = 9
+const OPEN_TIMEOUT_MS = 15000 // the sequence normally takes about 6 seconds
 
 /**
  * The opening scene. The whole sequence is choreographed here:
@@ -21,8 +22,29 @@ export default function Envelope({ onOpenStart, onReveal, onDone }) {
   async function open() {
     if (opening) return
     setOpening(true)
-    onOpenStart() // must run inside the click so browsers allow the music to start
 
+    // Music and animation are optional: the invitation must open even if either fails.
+    try {
+      onOpenStart() // must run inside the click so browsers allow the music to start
+    } catch (error) {
+      console.error(error)
+    }
+    const finish = () => {
+      onReveal()
+      onDone()
+    }
+    const watchdog = setTimeout(finish, OPEN_TIMEOUT_MS)
+    try {
+      await playOpening()
+    } catch (error) {
+      console.error(error)
+    } finally {
+      clearTimeout(watchdog)
+      finish()
+    }
+  }
+
+  async function playOpening() {
     const root = scope.current
 
     if (reduced) {
