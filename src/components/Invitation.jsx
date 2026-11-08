@@ -25,7 +25,7 @@ export default function Invitation() {
             <Hosts />
           </Reveal>
           <Reveal as="p" className="invite-card__line" delay={0.4}>
-            Cordially invite you and your family to grace the wedding celebration of their beloved son
+            Cordially invite you and your family to grace the wedding celebration of our beloved son
           </Reveal>
           <Reveal as="p" className="invite-card__name foil-dark" delay={0.5}>
             {GROOM}

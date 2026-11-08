@@ -1,6 +1,6 @@
 // The single source of truth for every wedding detail shown on the site.
 
-export const HOSTS = 'Mr. Syed Ibrahim & Mrs. Najiba Begam'
+export const HOSTS = 'mr. Syed Ibrahim & mrs. Najiba Begam'
 export const GROOM = 'Meeran Mydeen'
 export const BRIDE = 'Amra Banu'
 export const SHORT_NAMES = 'Meeran & Amra'
@@ -23,7 +23,7 @@ export function whatsappShareUrl(siteUrl) {
   const message = [
     '*A Family Wedding Invitation*',
     '',
-    `${HOSTS} cordially invite you and your family to grace the wedding celebration of their beloved son`,
+    `${HOSTS} cordially invite you and your family to grace the wedding celebration of our beloved son`,
     '',
     `*${GROOM}* with *${BRIDE}*`,
     '',

@@ -23,7 +23,7 @@ export default function Welcome() {
           <Hosts />
         </Reveal>
         <Reveal as="p" className="welcome__request" delay={1}>
-          Request the pleasure of your company and blessings on the joyous occasion of their beloved son&rsquo;s wedding.
+          Request the pleasure of your company and blessings on the joyous occasion of our beloved son&rsquo;s wedding.
         </Reveal>
       </div>
 
