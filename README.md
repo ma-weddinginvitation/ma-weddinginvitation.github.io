@@ -24,7 +24,7 @@ npm run dev       # opens at http://localhost:5173
 | --- | --- |
 | Names, date, time, venue, map links, WhatsApp message | `src/data/wedding.js` |
 | Colours and fonts | `src/index.css` |
-| Background music | Replace `public/music/royal-procession.mp3` (keep the file name) |
+| Background music | Replace `public/music/music.mp3` (keep the file name) |
 | Venue picture | `src/components/VenueIllustration.jsx`, or use an `<img>` in `Venue.jsx` |
 | Link preview image | `public/og-image.jpg` (1200 × 630) |
 

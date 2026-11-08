@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 
-const TRACK = `${import.meta.env.BASE_URL}music/royal-procession.mp3`
+const TRACK = `${import.meta.env.BASE_URL}music/music.mp3`
 const TARGET_VOLUME = 0.55
 const FADE_MS = 1800
 
